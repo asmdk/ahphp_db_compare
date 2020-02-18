@@ -11,15 +11,15 @@
 
 	try {
 		$dbh = new PDO($dsn, $user, $password);
-		$sth = $dbh->prepare("INSERT records SET name = :name, text = :text, price = :price, status = :status, timestamp = :timestamp, date = :date");
 		
 		$price = 0;
 		for ($i = 0; $i < 100; $i++) {
+			$sth = $dbh->prepare("INSERT records SET name = :name, text = :text, price = :price, status = :status, timestamp = :timestamp, date = :date");
 			$fields = ['name' => 'This is a long name!', 'text' => 'This is a long text', 'price' => $price++, 'status' => rand(1, 10), 'timestamp' => date('Y-m-d h:i:s'), 'date' => date('Y-m-d h:i:s')];
 			$sth->execute($fields);
 		}
 		
-		$conn=null;
+		$dbh=null;
 		
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
