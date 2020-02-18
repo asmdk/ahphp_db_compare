@@ -1,0 +1,16 @@
+{
+    "name": "dzianis_kel/amp",
+    "authors": [
+        {
+            "name": "Dzianis Kel",
+            "email": "asm32dk@gmail.com"
+        }
+    ],
+    "require": {
+        "amphp/amp": "^2.4",
+        "amphp/mysql": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {"App\\": "src/"}
+	}
+}
