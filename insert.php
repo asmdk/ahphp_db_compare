@@ -11,7 +11,7 @@
 	
 	$db = Amp\Mysql\pool($config);
 		
-	Amp\Loop::run(function () use ($db, $promise2) {
+	Amp\Loop::run(function () use ($db) {
 		
 		$promise = yield $db->prepare("INSERT records SET name = :name, text = :text, price = :price, status = :status, timestamp = :timestamp, date = :date");
 		$results = [];
