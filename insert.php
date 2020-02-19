@@ -13,16 +13,15 @@
 		
 	Amp\Loop::run(function () use ($db) {
 		
-		$promise = yield $db->prepare("INSERT records SET name = :name, text = :text, price = :price, status = :status, timestamp = :timestamp, date = :date");
-		$results = [];
+		$statement = yield $db->prepare("INSERT records SET name = :name, text = :text, price = :price, status = :status, timestamp = :timestamp, date = :date");
+		$promises = [];
 		
 		$price = 0;
 		for ($i = 0; $i < 100; $i++)  {
-			$results = yield $promise->execute(['name' => 'This is a long name!', 'text' => 'This is a long text', 'price' => $price++, 'status' => rand(1, 10), 'timestamp' => date('Y-m-d h:i:s'), 'date' => date('Y-m-d h:i:s')]);
+			$promises[] = $statement->execute(['name' => 'This is a long name!', 'text' => 'This is a long text', 'price' => $price++, 'status' => rand(1, 10), 'timestamp' => date('Y-m-d h:i:s'), 'date' => date('Y-m-d h:i:s')]);
 		}
 		
-		foreach($results as $result) {
-		}
+		yield $promises;
 		
 	});
 	
